@@ -1,0 +1,86 @@
+/* ============================================
+   Velo — Design Tokens
+   Clean iOS-style light mode app aesthetics
+   ============================================ */
+
+:root {
+  /* ─── Background & Cards ─── */
+  --color-bg: #F6F6F6;
+  --color-card-bg: #FFFFFF;
+  --color-card-hover: #F9F9F9;
+
+  /* ─── Typography & Inks ─── */
+  --color-text-main: #000000;
+  --color-text-secondary: #4A4A4A;
+  --color-text-muted: #8E8D8A;
+  --color-text-inverse: #FFFFFF;
+
+  /* ─── Brand Accents (Variant Purple) ─── */
+  --color-primary: #B18EFA;
+  --color-primary-light: #EADFFA;
+  --color-primary-translucent: rgba(177, 142, 250, 0.4);
+  --color-primary-dark: #8F60EC;
+
+  /* ─── Status Accents ─── */
+  --color-success: #34C759;
+  --color-warning: #FF9500;
+  --color-danger: #FF3B30;
+
+  /* ─── Typography (SF Pro / Inter style) ─── */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.8125rem;   /* 13px */
+  --text-base: 0.9375rem; /* 15px */
+  --text-lg: 1.125rem;    /* 18px */
+  --text-xl: 1.25rem;     /* 20px */
+  --text-2xl: 1.75rem;    /* 28px */
+  --text-hero: 3.5rem;    /* 56px */
+
+  /* ─── Font Weights ─── */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-black: 800;
+
+  /* ─── Spacing ─── */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.25rem;  /* 20px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-10: 2.5rem;  /* 40px */
+  --space-12: 3rem;    /* 48px */
+
+  /* ─── Borders & Radius (Smooth, High values) ─── */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --radius-pill: 100px;
+  
+  --border-thin: 1px solid rgba(0,0,0,0.05);
+
+  /* ─── Shadows (Soft and Diffuse) ─── */
+  --shadow-sm: 0 4px 12px rgba(0,0,0,0.03);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.04);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.06);
+  --shadow-nav: 0 -4px 40px rgba(0,0,0,0.05);
+
+  /* ─── Transitions ─── */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ─── Z-index ─── */
+  --z-base: 1;
+  --z-nav: 10;
+  --z-modal: 100;
+
+  /* ─── Layout ─── */
+  --max-width: 430px; /* Mobile app feel */
+}
