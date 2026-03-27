@@ -29,20 +29,22 @@ export function renderAssignments(container) {
   }).length;
 
   container.innerHTML = `
-    <header class="page-header">
-      <div class="assignments-header-top">
-        <div>
-          <h1 class="page-title">Tracker</h1>
-        </div>
-        <button class="btn btn-primary" id="btn-add-assignment" style="padding: 10px; border-radius: 100px;">
-          ${SVGS.plus} 
+    <header class="page-header" style="flex-direction: column; align-items: stretch; gap: 16px; padding-bottom: 8px;">
+      <div class="assignments-header-top" style="align-items: center;">
+        <h1 class="page-title">Tracker</h1>
+        <button class="btn btn-primary btn-sm" id="btn-start-focus-main" style="border-radius: var(--radius-pill);">
+          Start Focus
         </button>
       </div>
-      ${todayDueCount > 0 ? `
-        <div class="assignments-today-summary">
-          ${todayDueCount} due today
-        </div>
-      ` : ''}
+
+      <div class="quick-add-container">
+        <input type="text" class="quick-add-input" id="quick-add-input" placeholder="+ Add assignment..." autocomplete="off" />
+      </div>
+
+      <div class="today-section">
+        <h2 class="today-title">Today</h2>
+        <span class="today-count">${todayDueCount > 0 ? `${todayDueCount} tasks due today` : 'No tasks due'}</span>
+      </div>
     </header>
     
     <div class="page-content">
@@ -66,9 +68,32 @@ export function renderAssignments(container) {
     });
   });
 
-  container.querySelector('#btn-add-assignment').addEventListener('click', () => {
-    showAddModal(container, () => renderAssignments(container));
-  });
+  const btnStartFocusMain = container.querySelector('#btn-start-focus-main');
+  if (btnStartFocusMain) {
+    btnStartFocusMain.addEventListener('click', () => navigate('#/timer'));
+  }
+
+  const quickAddInput = container.querySelector('#quick-add-input');
+  if (quickAddInput) {
+    quickAddInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && quickAddInput.value.trim()) {
+        const title = quickAddInput.value.trim();
+        const tomorrow = new Date();
+        tomorrow.setHours(23, 59, 0, 0);
+        
+        try {
+          addAssignment({
+            title,
+            subject: 'General',
+            deadline: tomorrow.toISOString()
+          });
+          renderAssignments(container);
+        } catch (err) {
+          console.error('Failed to add assignment', err);
+        }
+      }
+    });
+  }
 
   function renderList() {
     const listEl = container.querySelector('#assignment-list');
@@ -78,6 +103,30 @@ export function renderAssignments(container) {
       assignments = assignments.filter(a => a.status === 'pending');
     } else if (currentFilter === 'completed') {
       assignments = assignments.filter(a => a.status === 'completed');
+    }
+
+    if (assignments.length === 0 && currentFilter === 'all') {
+      listEl.innerHTML = `
+        <div class="empty-state-new">
+          <h2 class="empty-title">Start your study session</h2>
+          <p class="empty-subtitle">No tasks yet.</p>
+          <p class="empty-text">Add your first assignment and start focusing.</p>
+          <div class="empty-actions">
+            <button class="btn btn-secondary" id="btn-empty-add">Add Assignment</button>
+            <button class="btn btn-primary" id="btn-empty-focus">Start Focus</button>
+          </div>
+        </div>
+      `;
+      
+      const btnEmptyAdd = listEl.querySelector('#btn-empty-add');
+      if (btnEmptyAdd) {
+        btnEmptyAdd.addEventListener('click', () => showAddModal(container, () => renderAssignments(container)));
+      }
+      const btnEmptyFocus = listEl.querySelector('#btn-empty-focus');
+      if (btnEmptyFocus) {
+        btnEmptyFocus.addEventListener('click', () => navigate('#/timer'));
+      }
+      return;
     }
 
     if (assignments.length === 0) {
