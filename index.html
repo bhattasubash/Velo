@@ -4,27 +4,88 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     
-    <!-- PWA Meta -->
+    <!-- ═══ SEO Meta Tags ═══ -->
+    <title>Velo – Minimal Study Timer & Assignment Tracker</title>
+    <meta name="description" content="A distraction-free study companion for students. Track assignments and focus with a built-in timer. Free, private, and works offline." />
+    <meta name="keywords" content="study timer, pomodoro, assignment tracker, student productivity, focus timer, study planner, task manager" />
+    <meta name="author" content="Velo" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://velo-app.netlify.app/" />
+    
+    <!-- ═══ Open Graph (Social Sharing) ═══ -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Velo – Minimal Study Timer & Assignment Tracker" />
+    <meta property="og:description" content="A distraction-free study companion for students. Track assignments and focus with a built-in timer." />
+    <meta property="og:url" content="https://velo-app.netlify.app/" />
+    <meta property="og:image" content="https://velo-app.netlify.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Velo" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- ═══ Twitter Card ═══ -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Velo – Minimal Study Timer & Assignment Tracker" />
+    <meta name="twitter:description" content="A distraction-free study companion for students. Track assignments and focus with a built-in timer." />
+    <meta name="twitter:image" content="https://velo-app.netlify.app/og-image.png" />
+    
+    <!-- ═══ PWA Meta ═══ -->
     <meta name="theme-color" content="#111111" />
-    <meta name="description" content="Fast, minimal study companion for assignments and focus" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Velo" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="Velo" />
     
-    <!-- Icons -->
+    <!-- ═══ Icons ═══ -->
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
     <link rel="apple-touch-icon" href="/icon-192.png" />
     
-    <!-- Web App Manifest -->
+    <!-- ═══ Web App Manifest ═══ -->
     <link rel="manifest" href="/manifest.json" />
-    
-    <title>Velo</title>
+
+    <!-- ═══ Structured Data (JSON-LD) ═══ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Velo",
+      "alternateName": "Velo Study Timer",
+      "description": "A distraction-free study companion for students. Track assignments and focus with a built-in timer.",
+      "url": "https://velo-app.netlify.app/",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires a modern web browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Assignment tracking",
+        "Focus timer with Pomodoro technique",
+        "Progress statistics",
+        "Calendar view",
+        "Works offline",
+        "No account required"
+      ]
+    }
+    </script>
   </head>
   <body>
+    <!-- ═══ App Root ═══ -->
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
 
-    <!-- Service Worker Registration -->
+    <!-- ═══ Noscript Fallback ═══ -->
+    <noscript>
+      <div style="padding: 40px; text-align: center; font-family: -apple-system, sans-serif;">
+        <h1>Velo</h1>
+        <p>Please enable JavaScript to use the Velo study timer and assignment tracker.</p>
+      </div>
+    </noscript>
+
+    <!-- ═══ Service Worker Registration ═══ -->
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {

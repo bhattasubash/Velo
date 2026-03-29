@@ -1,0 +1,92 @@
+/* ============================================
+   Velo — Cookie Consent Banner Styles
+   Non-intrusive bottom banner that matches Velo's design
+   ============================================ */
+
+#cookie-consent-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  padding: 0 16px 16px;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  pointer-events: none;
+}
+
+#cookie-consent-banner.visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cookie-consent-inner {
+  max-width: 430px;
+  margin: 0 auto;
+  background: var(--color-card-bg, #FFFFFF);
+  border-radius: var(--radius-md, 16px);
+  box-shadow: 0 -4px 40px rgba(0, 0, 0, 0.1), 0 8px 32px rgba(0, 0, 0, 0.08);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cookie-consent-text {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary, #4A4A4A);
+  margin: 0;
+}
+
+.cookie-consent-text a {
+  color: var(--color-primary, #B18EFA);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.cookie-consent-text a:hover {
+  text-decoration: underline;
+}
+
+.cookie-consent-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.cookie-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--radius-xs, 8px);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+  font-family: inherit;
+}
+
+.cookie-btn:active {
+  transform: scale(0.97);
+}
+
+.cookie-btn-accept {
+  background: var(--color-text-main, #000000);
+  color: var(--color-text-inverse, #FFFFFF);
+}
+
+.cookie-btn-accept:hover {
+  background: #222;
+}
+
+.cookie-btn-decline {
+  background: transparent;
+  color: var(--color-text-muted, #8E8D8A);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.cookie-btn-decline:hover {
+  background: rgba(0, 0, 0, 0.03);
+}

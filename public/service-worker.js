@@ -3,7 +3,7 @@
    Cache-first for app shell, network-first for data
    ============================================ */
 
-const CACHE_NAME = 'velo-v1';
+const CACHE_NAME = 'velo-v2';
 
 const PRECACHE_ASSETS = [
   '/',

@@ -5,6 +5,7 @@
 import { getAssignments, addSession, getAssignment, formatDuration } from '../data/store.js';
 import { navigate } from '../app.js';
 import { timerState, FOCUS_DURATION, BREAK_DURATION } from '../data/timerStore.js';
+import { trackEvent } from '../analytics.js';
 
 let currentKeydownHandler = null;
 
@@ -146,6 +147,7 @@ function startTimer(container) {
 
   timerState.intervalId = setInterval(() => tick(container), 1000);
   updateTitle();
+  trackEvent('start_focus', { duration: FOCUS_DURATION, linked_task: !!timerState.assignmentId });
 }
 
 function toggleTimer(container) {
