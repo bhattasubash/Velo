@@ -95,6 +95,7 @@ export function renderTimer(container) {
 
   container.querySelector('#btn-timer-main').addEventListener('click', () => {
     if (!timerState.isRunning) {
+      window.gtag && window.gtag('event', 'start_focus_clicked');
       // Instead of starting in place, navigate to the immersive focus mode
       navigate('#/focus');
     } else if (timerState.isPaused) {

@@ -74,7 +74,10 @@ export function renderAssignments(container) {
 
   const btnStartFocusMain = container.querySelector('#btn-start-focus-main');
   if (btnStartFocusMain) {
-    btnStartFocusMain.addEventListener('click', () => navigate('#/timer'));
+    btnStartFocusMain.addEventListener('click', () => {
+      window.gtag && window.gtag('event', 'start_focus_clicked');
+      navigate('#/timer');
+    });
   }
 
   const quickAddInput = container.querySelector('#quick-add-input');
@@ -91,6 +94,7 @@ export function renderAssignments(container) {
             subject: 'General',
             deadline: tomorrow.toISOString()
           });
+          window.gtag && window.gtag('event', 'task_added');
           renderAssignments(container);
         } catch (err) {
           console.error('Failed to add assignment', err);
@@ -128,7 +132,10 @@ export function renderAssignments(container) {
       }
       const btnEmptyFocus = listEl.querySelector('#btn-empty-focus');
       if (btnEmptyFocus) {
-        btnEmptyFocus.addEventListener('click', () => navigate('#/timer'));
+        btnEmptyFocus.addEventListener('click', () => {
+          window.gtag && window.gtag('event', 'start_focus_clicked');
+          navigate('#/timer');
+        });
       }
       return;
     }
@@ -204,6 +211,7 @@ export function renderAssignments(container) {
             renderAssignments(container);
           }
         } else if (action === 'focus') {
+          window.gtag && window.gtag('event', 'start_focus_clicked');
           sessionStorage.setItem('studysync_focus_assignment', id);
           navigate('#/timer');
         }
@@ -254,6 +262,7 @@ export function renderAssignments(container) {
         popup.classList.remove('visible');
         setTimeout(() => {
           popup.remove();
+          window.gtag && window.gtag('event', 'start_focus_clicked');
           navigate('#/focus'); // Jumps straight into active session
         }, 300);
       });
@@ -350,6 +359,7 @@ function showAddModal(container, onAdd) {
         subject: overlay.querySelector('#input-subject').value,
         deadline: overlay.querySelector('#input-deadline').value
       });
+      window.gtag && window.gtag('event', 'task_added');
       closeModal();
       onAdd();
     } catch (err) {

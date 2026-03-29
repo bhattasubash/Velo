@@ -148,6 +148,7 @@ function startTimer(container) {
   timerState.intervalId = setInterval(() => tick(container), 1000);
   updateTitle();
   trackEvent('start_focus', { duration: FOCUS_DURATION, linked_task: !!timerState.assignmentId });
+  window.gtag && window.gtag('event', 'session_started');
 }
 
 function toggleTimer(container) {
@@ -196,7 +197,7 @@ function finishSessionAndExit(container) {
         
         <div style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
           <button class="btn btn-primary btn-lg" id="btn-session-done" style="width: 100%;">Done</button>
-          <a href="https://forms.gle/GbQysnTp6RpJMZqK9" target="_blank" class="btn btn-secondary btn-lg" style="width: 100%; text-decoration: none;">Give Feedback</a>
+          <a href="https://forms.gle/GbQysnTp6RpJMZqK9" id="btn-feedback" target="_blank" class="btn btn-secondary btn-lg" style="width: 100%; text-decoration: none;">Give Feedback</a>
         </div>
       </div>
     </div>
@@ -205,8 +206,16 @@ function finishSessionAndExit(container) {
   const doneBtn = container.querySelector('#btn-session-done');
   if (doneBtn) {
     doneBtn.addEventListener('click', () => {
+      window.gtag && window.gtag('event', 'session_completed');
       resetTimerState();
       navigate('#/'); // go home
+    });
+  }
+
+  const feedbackBtn = container.querySelector('#btn-feedback');
+  if (feedbackBtn) {
+    feedbackBtn.addEventListener('click', () => {
+      window.gtag && window.gtag('event', 'feedback_clicked');
     });
   }
 }
@@ -238,6 +247,7 @@ function tick(container) {
         try { addSession(timerState.assignmentId, FOCUS_DURATION); } catch(e) {}
       }
       playNotification();
+      window.gtag && window.gtag('event', 'session_completed');
       timerState.mode = 'break';
       timerState.totalSeconds = BREAK_DURATION;
       timerState.remainingSeconds = BREAK_DURATION;
