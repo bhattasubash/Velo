@@ -163,11 +163,45 @@ function toggleTimer(container) {
 
 function finishSessionAndExit(container) {
   clearInterval(timerState.intervalId);
-  if (timerState.elapsedFocusSeconds > 0 && timerState.assignmentId) {
-    try { addSession(timerState.assignmentId, timerState.elapsedFocusSeconds); } catch (e) {}
+  const secondsFocused = timerState.elapsedFocusSeconds;
+  
+  if (secondsFocused > 0 && timerState.assignmentId) {
+    try { addSession(timerState.assignmentId, secondsFocused); } catch (e) {}
   }
-  resetTimerState();
-  navigate('#/'); // go home
+  
+  // Format seconds to text exactly as requested: "You focused for [X] seconds"
+  // For larger values, we'll format it nicely:
+  let timeString = `${secondsFocused} seconds`;
+  if (secondsFocused >= 60) {
+    const mins = Math.floor(secondsFocused / 60);
+    const secs = secondsFocused % 60;
+    timeString = `${mins} minute${mins !== 1 ? 's' : ''}${secs > 0 ? ` and ${secs} second${secs !== 1 ? 's' : ''}` : ''}`;
+  }
+
+  // Render minimal session complete screen
+  container.innerHTML = `
+    <div class="focus-fullscreen-container" style="justify-content: center; align-items: center; background: var(--color-bg); padding: 24px;">
+      <div style="text-align: center; max-width: 400px;">
+        <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 12px; font-family: var(--font-sans);">Session Complete</h2>
+        <div style="font-size: 18px; color: var(--color-text-secondary); margin-bottom: 40px; font-weight: 500;">
+          You focused for ${timeString}
+        </div>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
+          <button class="btn btn-primary btn-lg" id="btn-session-done" style="width: 100%;">Done</button>
+          <a href="https://forms.gle/GbQysnTp6RpJMZqK9" target="_blank" class="btn btn-secondary btn-lg" style="width: 100%; text-decoration: none;">Give Feedback</a>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const doneBtn = container.querySelector('#btn-session-done');
+  if (doneBtn) {
+    doneBtn.addEventListener('click', () => {
+      resetTimerState();
+      navigate('#/'); // go home
+    });
+  }
 }
 
 function handleExit(container) {

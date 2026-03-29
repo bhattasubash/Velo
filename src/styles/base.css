@@ -437,3 +437,39 @@ empty-state {
   from { transform: translateY(-100%); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
+
+/* ─── Floating Feedback Button (Beta Style) ─── */
+.floating-feedback-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: var(--color-primary); /* Soft purple tone */
+  color: var(--color-text-main);
+  padding: 10px 20px;
+  border-radius: 9999px; /* Pill shape */
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  z-index: 9999; /* Ensure it stays on top */
+  animation: floatUpDown 3s ease-in-out infinite;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.floating-feedback-btn:active {
+  transform: scale(0.95);
+}
+
+@keyframes floatUpDown {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* Must not overlap navigation on mobile */
+@media (max-width: 650px) {
+  .floating-feedback-btn {
+    bottom: 110px; /* Above the 90px bottom nav */
+    right: 16px;
+  }
+}

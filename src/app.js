@@ -90,6 +90,14 @@ export function initApp() {
   const nav = createNav();
   app.appendChild(nav);
 
+  // ─── Floating Feedback Button ───
+  const floatingFeedback = document.createElement('a');
+  floatingFeedback.href = 'https://forms.gle/GbQysnTp6RpJMZqK9';
+  floatingFeedback.target = '_blank';
+  floatingFeedback.className = 'floating-feedback-btn';
+  floatingFeedback.innerHTML = 'Feedback';
+  app.appendChild(floatingFeedback);
+
   window.addEventListener('hashchange', () => handleRoute());
 
   if (!window.location.hash || !ROUTES[window.location.hash]) {

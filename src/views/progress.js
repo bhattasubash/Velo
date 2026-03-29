@@ -96,6 +96,16 @@ export function renderProgress(container) {
         `}
       </div>
 
+      <!-- More Section -->
+      <div class="more-section" style="margin-bottom: 32px; padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.05);">
+        <h3 style="font-size: 14px; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 12px; letter-spacing: 0.5px; text-transform: uppercase;">More</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+          <li><a href="https://forms.gle/GbQysnTp6RpJMZqK9" target="_blank" style="display: block; padding: 12px 16px; background: var(--color-card-bg); border-radius: var(--radius-sm); color: var(--color-text-main); text-decoration: none; box-shadow: var(--shadow-sm);">Give Feedback</a></li>
+          <li><a href="/privacy.html" style="display: block; padding: 12px 16px; background: var(--color-card-bg); border-radius: var(--radius-sm); color: var(--color-text-main); text-decoration: none; box-shadow: var(--shadow-sm);">Privacy Policy</a></li>
+          <li><a href="/terms.html" style="display: block; padding: 12px 16px; background: var(--color-card-bg); border-radius: var(--radius-sm); color: var(--color-text-main); text-decoration: none; box-shadow: var(--shadow-sm);">Terms of Service</a></li>
+        </ul>
+      </div>
+
     </div>
   `;
 
