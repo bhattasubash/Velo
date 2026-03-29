@@ -7,6 +7,7 @@ import { getAssignments, addAssignment, toggleAssignment, deleteAssignment,
   getUrgency, formatDeadline, formatDuration
 } from '../data/store.js';
 import { navigate } from '../app.js';
+import { trackEvent } from '../analytics.js';
 
 let hasShownAutoStart = false;
 
@@ -75,7 +76,7 @@ export function renderAssignments(container) {
   const btnStartFocusMain = container.querySelector('#btn-start-focus-main');
   if (btnStartFocusMain) {
     btnStartFocusMain.addEventListener('click', () => {
-      window.gtag && window.gtag('event', 'start_focus_clicked');
+      trackEvent('start_focus_clicked', { source: 'tracker_header', task_name: 'none' });
       navigate('#/timer');
     });
   }
@@ -94,7 +95,7 @@ export function renderAssignments(container) {
             subject: 'General',
             deadline: tomorrow.toISOString()
           });
-          window.gtag && window.gtag('event', 'task_added');
+          trackEvent('task_added', { task_length: title.length, method: 'typed_quick_add' });
           renderAssignments(container);
         } catch (err) {
           console.error('Failed to add assignment', err);
@@ -133,7 +134,7 @@ export function renderAssignments(container) {
       const btnEmptyFocus = listEl.querySelector('#btn-empty-focus');
       if (btnEmptyFocus) {
         btnEmptyFocus.addEventListener('click', () => {
-          window.gtag && window.gtag('event', 'start_focus_clicked');
+          trackEvent('start_focus_clicked', { source: 'empty_state', task_name: 'none' });
           navigate('#/timer');
         });
       }
@@ -211,7 +212,8 @@ export function renderAssignments(container) {
             renderAssignments(container);
           }
         } else if (action === 'focus') {
-          window.gtag && window.gtag('event', 'start_focus_clicked');
+          const taskObj = getAssignments().find(a => a.id === id);
+          trackEvent('start_focus_clicked', { source: 'task_card_play', task_name: taskObj ? taskObj.title : 'error' });
           sessionStorage.setItem('studysync_focus_assignment', id);
           navigate('#/timer');
         }
@@ -250,7 +252,10 @@ export function renderAssignments(container) {
       
       // Delay to allow DOM attachment before fade-in
       requestAnimationFrame(() => {
-        requestAnimationFrame(() => popup.classList.add('visible'));
+        requestAnimationFrame(() => {
+          popup.classList.add('visible');
+          trackEvent('auto_start_prompt_shown');
+        });
       });
       
       popup.querySelector('#btn-autostart-no').addEventListener('click', () => {
@@ -259,10 +264,11 @@ export function renderAssignments(container) {
       });
       
       popup.querySelector('#btn-autostart-yes').addEventListener('click', () => {
+        trackEvent('auto_start_started');
+        trackEvent('start_focus_clicked', { source: 'auto_start_popup', task_name: 'none' });
         popup.classList.remove('visible');
         setTimeout(() => {
           popup.remove();
-          window.gtag && window.gtag('event', 'start_focus_clicked');
           navigate('#/focus'); // Jumps straight into active session
         }, 300);
       });
@@ -354,12 +360,13 @@ function showAddModal(container, onAdd) {
     const errorEl = overlay.querySelector('#form-error');
 
     try {
+      const title = overlay.querySelector('#input-title').value;
       addAssignment({
-        title: overlay.querySelector('#input-title').value,
+        title,
         subject: overlay.querySelector('#input-subject').value,
         deadline: overlay.querySelector('#input-deadline').value
       });
-      window.gtag && window.gtag('event', 'task_added');
+      trackEvent('task_added', { task_length: title.length, method: 'modal_form' });
       closeModal();
       onAdd();
     } catch (err) {

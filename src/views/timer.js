@@ -5,6 +5,7 @@
 import { getAssignments, addSession, getAssignment, formatDuration } from '../data/store.js';
 import { timerState, FOCUS_DURATION, BREAK_DURATION } from '../data/timerStore.js';
 import { navigate } from '../app.js';
+import { trackEvent } from '../analytics.js';
 
 const SVGS = {
   play: `<svg class="icon icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>`,
@@ -95,7 +96,7 @@ export function renderTimer(container) {
 
   container.querySelector('#btn-timer-main').addEventListener('click', () => {
     if (!timerState.isRunning) {
-      window.gtag && window.gtag('event', 'start_focus_clicked');
+      trackEvent('start_focus_clicked', { source: 'timer_preview', task_name: currentTaskName });
       // Instead of starting in place, navigate to the immersive focus mode
       navigate('#/focus');
     } else if (timerState.isPaused) {
@@ -149,6 +150,16 @@ function resumeTimer(container) {
 
 function stopTimer(container) {
   clearInterval(timerState.intervalId);
+
+  const time_spent_mins = timerState.elapsedFocusSeconds / 60;
+  const percent_completed = (timerState.elapsedFocusSeconds / timerState.totalSeconds) * 100;
+
+  if (timerState.mode === 'focus' && timerState.elapsedFocusSeconds > 0) {
+    trackEvent('session_abandoned', { 
+      time_spent: Math.round(time_spent_mins * 10) / 10, 
+      percent_completed: Math.round(percent_completed) 
+    });
+  }
 
   if (timerState.elapsedFocusSeconds > 0 && timerState.assignmentId) {
     try { addSession(timerState.assignmentId, timerState.elapsedFocusSeconds); } catch (e) {}

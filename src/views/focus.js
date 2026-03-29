@@ -147,8 +147,7 @@ function startTimer(container) {
 
   timerState.intervalId = setInterval(() => tick(container), 1000);
   updateTitle();
-  trackEvent('start_focus', { duration: FOCUS_DURATION, linked_task: !!timerState.assignmentId });
-  window.gtag && window.gtag('event', 'session_started');
+  trackEvent('session_started', { duration: FOCUS_DURATION / 60, trigger: 'focus_mode_init' });
 }
 
 function toggleTimer(container) {
@@ -203,10 +202,19 @@ function finishSessionAndExit(container) {
     </div>
   `;
 
+  if (streak > 0) {
+    trackEvent('streak_viewed', { streak_days: streak });
+  }
+
   const doneBtn = container.querySelector('#btn-session-done');
   if (doneBtn) {
     doneBtn.addEventListener('click', () => {
-      window.gtag && window.gtag('event', 'session_completed');
+      const taskObj = timerState.assignmentId ? getAssignment(timerState.assignmentId) : null;
+      trackEvent('session_completed', { 
+        duration_completed: secondsFocused / 60, 
+        task_name: taskObj ? taskObj.title : 'Unlinked Session',
+        type: 'manual_exit'
+      });
       resetTimerState();
       navigate('#/'); // go home
     });
@@ -215,7 +223,7 @@ function finishSessionAndExit(container) {
   const feedbackBtn = container.querySelector('#btn-feedback');
   if (feedbackBtn) {
     feedbackBtn.addEventListener('click', () => {
-      window.gtag && window.gtag('event', 'feedback_clicked');
+      trackEvent('feedback_clicked', { location: 'end_screen' });
     });
   }
 }
@@ -247,7 +255,12 @@ function tick(container) {
         try { addSession(timerState.assignmentId, FOCUS_DURATION); } catch(e) {}
       }
       playNotification();
-      window.gtag && window.gtag('event', 'session_completed');
+      const taskObj = timerState.assignmentId ? getAssignment(timerState.assignmentId) : null;
+      trackEvent('session_completed', { 
+        duration_completed: FOCUS_DURATION / 60, 
+        task_name: taskObj ? taskObj.title : 'Unlinked Session',
+        type: 'auto_completed'
+      });
       timerState.mode = 'break';
       timerState.totalSeconds = BREAK_DURATION;
       timerState.remainingSeconds = BREAK_DURATION;
