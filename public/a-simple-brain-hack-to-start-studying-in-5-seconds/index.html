@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Simple Brain Hack to Start Studying in 5 Seconds | Velo</title>
+  <meta name="description" content="Starting is the hardest part of studying. You may plan everything, but still delay beginning. There is a simple brain hack that can help you start studying..." />
+  <meta name="keywords" content="A, Simple, Brain, Hack, to, Start, Studying, in, 5, Seconds" />
+  <link rel="canonical" href="https://getvelo.vercel.app/a-simple-brain-hack-to-start-studying-in-5-seconds/" />
+  <meta property="og:title" content="A Simple Brain Hack to Start Studying in 5 Seconds | Velo" />
+  <meta property="og:description" content="Starting is the hardest part of studying. You may plan everything, but still delay beginning. There is a simple brain hack that can help you start studying..." />
+  <meta property="og:url" content="https://getvelo.vercel.app/a-simple-brain-hack-to-start-studying-in-5-seconds/" />
+  <meta property="og:type" content="article" />
+  
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ============================================
+   Velo — Design Tokens
+   Clean iOS-style light mode app aesthetics
+   ============================================ */
+
+:root {
+  /* ─── Background & Cards ─── */
+  --color-bg: #F6F6F6;
+  --color-card-bg: #FFFFFF;
+  --color-card-hover: #F9F9F9;
+
+  /* ─── Typography & Inks ─── */
+  --color-text-main: #000000;
+  --color-text-secondary: #4A4A4A;
+  --color-text-muted: #8E8D8A;
+  --color-text-inverse: #FFFFFF;
+
+  /* ─── Brand Accents (Variant Purple) ─── */
+  --color-primary: #B18EFA;
+  --color-primary-light: #EADFFA;
+  --color-primary-translucent: rgba(177, 142, 250, 0.4);
+  --color-primary-dark: #8F60EC;
+
+  /* ─── Status Accents ─── */
+  --color-success: #34C759;
+  --color-warning: #FF9500;
+  --color-danger: #FF3B30;
+
+  /* ─── Typography (SF Pro / Inter style) ─── */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.8125rem;   /* 13px */
+  --text-base: 0.9375rem; /* 15px */
+  --text-lg: 1.125rem;    /* 18px */
+  --text-xl: 1.25rem;     /* 20px */
+  --text-2xl: 1.75rem;    /* 28px */
+  --text-hero: 3.5rem;    /* 56px */
+
+  /* ─── Font Weights ─── */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-black: 800;
+
+  /* ─── Spacing ─── */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.25rem;  /* 20px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-10: 2.5rem;  /* 40px */
+  --space-12: 3rem;    /* 48px */
+
+  /* ─── Borders & Radius (Smooth, High values) ─── */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --radius-pill: 100px;
+  
+  --border-thin: 1px solid rgba(0,0,0,0.05);
+
+  /* ─── Shadows (Soft and Diffuse) ─── */
+  --shadow-sm: 0 4px 12px rgba(0,0,0,0.03);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.04);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.06);
+  --shadow-nav: 0 -4px 40px rgba(0,0,0,0.05);
+
+  /* ─── Transitions ─── */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ─── Z-index ─── */
+  --z-base: 1;
+  --z-nav: 10;
+  --z-modal: 100;
+
+  /* ─── Layout ─── */
+  --max-width: 430px; /* Mobile app feel */
+}
+
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    html, body {
+      background: #FAFAFA;
+      color: #222;
+      overflow-x: hidden;
+      overflow-y: auto !important;
+      min-height: 100vh;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ─── Reading Progress Bar ─── */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: linear-gradient(90deg, #3B82F6, #8B5CF6); z-index: 200; transition: width 0.1s linear;
+    }
+
+    /* ─── Navigation ─── */
+    .top-bar {
+      display: flex; justify-content: space-between; align-items: center; padding: 0 40px; height: 64px;
+      background: rgba(250, 250, 250, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100;
+    }
+    .top-bar .brand { font-family: 'Playfair Display', Georgia, serif; font-size: 24px; font-weight: 800; color: #111; text-decoration: none; letter-spacing: -0.02em; }
+    .top-bar .nav-cta { text-decoration: none; font-weight: 500; font-size: 14px; color: #fff; background: #111; padding: 10px 20px; border-radius: 6px; transition: 0.2s ease; }
+    .top-bar .nav-cta:hover { background: #333; }
+
+    /* ─── Layout Structure ─── */
+    .layout-wrapper {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 64px 24px 120px;
+      display: flex;
+      gap: 60px;
+      align-items: flex-start;
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    .main-content {
+      flex: 1;
+      max-width: 680px;
+      width: 100%;
+    }
+
+    .sidebar {
+      width: 300px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* ─── Main Content Styling ─── */
+    .breadcrumbs {
+      margin-bottom: 32px; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: #888;
+    }
+    .breadcrumbs a { color: #888; text-decoration: none; transition: 0.15s; }
+    .breadcrumbs a:hover { color: #222; }
+
+    .main-content h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 42px;
+      font-weight: 800;
+      color: #111;
+      line-height: 1.15;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .main-content h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #111;
+      margin-top: 40px;
+      margin-bottom: 16px;
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+    }
+
+    .main-content p {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 18px;
+      line-height: 1.75;
+      color: #1a1a1a;
+      margin-bottom: 24px;
+      font-weight: 400;
+    }
+    
+    .main-content ul {
+      margin-bottom: 24px;
+      padding-left: 24px;
+      font-size: 18px;
+      line-height: 1.75;
+      color: #1a1a1a;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    .main-content li {
+      margin-bottom: 8px;
+    }
+    .main-content strong {
+      font-weight: 600;
+      color: #111;
+    }
+
+    .main-content a {
+      color: #111; text-decoration: underline; text-decoration-color: rgba(17, 17, 17, 0.2); text-underline-offset: 3px; transition: 0.2s;
+    }
+    .main-content a:hover { text-decoration-color: #111; }
+
+    .article-meta {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid #EAEAEA;
+    }
+    .author-photo { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; background: #eee; }
+    .author-info strong { display: block; font-size: 14px; font-weight: 600; color: #333; }
+    .author-info span { font-size: 13px; color: #777; margin-top: 4px; display: block; }
+
+    .hero-image {
+      width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 10px; margin-bottom: 48px; display: block; box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+
+    /* ─── Sidebar Widgets ─── */
+    .sidebar-widget {
+      background: #fff;
+      border: 1px solid #EAEAEA;
+      border-radius: 12px;
+      padding: 32px 24px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+      transition: box-shadow 0.2s;
+    }
+    .sidebar-widget:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.06); }
+
+    .velo-promo { border-top: 4px solid #111; }
+    .velo-promo .promo-title {
+      font-family: 'Playfair Display', Georgia, serif; font-size: 20px; font-weight: 700; color: #111; margin-bottom: 12px;
+    }
+    .velo-promo .promo-desc {
+      font-size: 14px; color: #555; line-height: 1.6; margin-bottom: 24px;
+    }
+    .velo-promo .promo-features { list-style: none; margin-bottom: 24px; }
+    .velo-promo .promo-features li {
+      font-size: 13px; color: #555; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; font-weight: 500;
+    }
+    .velo-promo .promo-features li::before { content: "✓"; color: #000; font-weight: 800; }
+    
+    .velo-promo .promo-btn {
+      display: block; text-align: center; text-decoration: none; font-weight: 600; font-size: 14px; color: #fff; background: #111; padding: 14px; border-radius: 6px; transition: 0.2s ease;
+    }
+    .velo-promo .promo-btn:hover { background: #333; transform: translateY(-1px); }
+
+    .ad-container { padding: 16px; background: #F8F8F8; border: 1px solid #EEEEEE; border-radius: 8px; text-align: center; box-shadow: none; border-top: 1px solid #EEEEEE; }
+    .ad-container:hover { box-shadow: none; }
+    .ad-container .ad-label { font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 0.15em; display: block; margin-bottom: 16px; font-weight: 600; }
+    .ad-container .ad-placeholder { width: 100%; height: 250px; background: #EEE; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #AAA; font-size: 12px; border: 1px dashed #CCC; }
+
+    /* ─── Related Articles (Cluster) ─── */
+    .article-footer-hr {
+      margin: 80px 0 60px 0;
+      border-top: 1px solid #EAEAEA;
+    }
+    
+    .cluster-links { margin-bottom: 40px; }
+    .cluster-links h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 32px;
+      letter-spacing: -0.01em;
+    }
+    .cluster-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+    .cluster-card {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none !important;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+    }
+    .cluster-card:hover { 
+      transform: translateY(-4px); 
+      box-shadow: 0 12px 24px rgba(0,0,0,0.07); 
+    }
+    .card-doodle {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 150px;
+      height: 150px;
+      opacity: 0.08;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .card-doodle svg { width: 100%; height: 100%; }
+    
+    .cluster-card-img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: #eee;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+      z-index: 1;
+      position: relative;
+    }
+    .cluster-card-content {
+      padding: 24px;
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .cluster-tag {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #8B5CF6;
+      margin-bottom: 12px;
+      display: inline-block;
+      align-self: flex-start;
+      background: rgba(139, 92, 246, 0.1);
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+    .cluster-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 19px;
+      font-weight: 700;
+      color: #111;
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+    .cluster-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* ─── Animations & Responsive ─── */
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 992px) {
+      .layout-wrapper { flex-direction: column; }
+      .sidebar { width: 100%; position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; border-top: 1px solid #EAEAEA; padding-top: 48px; }
+    }
+    @media (max-width: 768px) {
+      .layout-wrapper { padding: 40px 20px 80px; }
+      .main-content h1 { font-size: 36px; }
+      .main-content h2 { font-size: 26px; }
+      .sidebar { grid-template-columns: 1fr; border-top: none; margin-top: 24px; padding-top: 24px; }
+      .cluster-grid { grid-template-columns: 1fr; gap: 24px; }
+      .top-bar { padding: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="progress-bar" id="progressBar"></div>
+
+  <header class="top-bar">
+    <a href="/" class="brand">Velo.</a>
+    <a href="https://getvelo.vercel.app/#/" class="nav-cta">Try Velo</a>
+  </header>
+
+  <div class="layout-wrapper">
+    <article class="main-content">
+      <div class="breadcrumbs">
+        <a href="/">Home</a> &rsaquo; The Starting Problem
+      </div>
+
+      <h1>A Simple Brain Hack to Start Studying in 5 Seconds</h1>
+    <div class="article-meta">
+        <img src="/author.png" alt="Subash Bhatta" class="author-photo">
+        <div class="author-info">
+            <strong>Subash Bhatta</strong>
+            <span>Updated March 2026 &bull; 5 min read</span>
+        </div>
+    </div>
+    <img src="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?auto=format&fit=crop&w=1200&q=80" alt="A Simple Brain Hack to Start Studying in 5 Seconds" class="hero-image" loading="lazy">
+    <div class="article-content">
+    <p>Starting is the hardest part of studying. You may plan everything, but still delay beginning. There is a simple brain hack that can help you start studying in seconds.</p>
+<h2>The Hack: The 5-Second Rule</h2>
+<p>The idea is simple.</p>
+<p>When you feel hesitation, count backward:</p>
+<ul>
+<li>5-4-3-2-1</li>
+</ul>
+<p>Then immediately take action.</p>
+<p>Do something small like:</p>
+<ul>
+<li>opening your book</li>
+<li>writing one sentence</li>
+<li>starting a timer</li>
+</ul>
+<p>The key is to act before your brain starts making excuses.</p>
+<h2>Why This Works</h2>
+<p><strong>It Stops Overthinking</strong> The countdown interrupts your thoughts and prevents your brain from delaying. <strong>It Activates Action</strong> Counting shifts your brain from passive thinking to active doing. <strong>It Breaks Procrastination</strong> Instead of waiting, you move instantly. This removes the delay where procrastination happens. <strong>It Builds Momentum</strong> Once you take the first step, continuing becomes easier.</p>
+<h2>How to Use It Effectively</h2>
+<p><strong>Use It at the Right Moment</strong> Apply the rule when you notice hesitation, distraction, or delay. <strong>Take Immediate Action</strong> Do not think after reaching “1.” Start instantly with a small task. <strong>Combine It With Preparation</strong> Keep your study setup ready so starting requires no extra effort.</p>
+<h2>Make It More Powerful</h2>
+<p><strong>Start With a Micro-Action</strong></p>
+<p>Pair the rule with a small step:</p>
+<ul>
+<li>open your notes</li>
+<li>read one line</li>
+<li>solve one question</li>
+<li>Visualize the Outcome</li>
+</ul>
+<p>Before counting, quickly imagine completing your study session. <strong>Continue Without Stopping</strong> Once you start, avoid pausing. Keep going to build momentum.</p>
+<h2>The Real Problem</h2>
+<p>Even with this hack, some days still feel difficult.</p>
+<p>You may:</p>
+<ul>
+<li>know the rule</li>
+<li>try to use it</li>
+<li>still hesitate</li>
+</ul>
+<p>This happens because you still rely on yourself to act in that moment. If you pause, your brain takes over again. The most effective way to start is to remove hesitation completely. If you can go directly from opening your study setup into action, you skip the delay entirely.</p>
+<p>A simple system can help by:</p>
+<ul>
+<li>removing extra steps</li>
+<li>showing one clear action</li>
+<li>letting you start instantly</li>
+</ul>
+<h2>Final Thoughts</h2>
+<p>The 5-second rule works because it forces action before overthinking begins. You do not need more motivation. You need to act quickly. The faster you start, the easier studying becomes. The key is simple: count down and begin.</p>
+</div> <!-- end article-content -->
+    
+    <div class="article-footer-hr"></div>
+    <section class="cluster-links">
+        <h3>Read Next from Velo</h3>
+        <div class="cluster-grid">
+            <a href="/how-to-start-studying-when-you-dont/" class="cluster-card">
+              <div class="card-doodle">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="80" fill="#8B5CF6"/></svg>
+              </div>
+              <img src="https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?auto=format&fit=crop&w=1200&q=80" alt="How to Start Studying When You Don’t Feel Like It" class="cluster-card-img" loading="lazy">
+              <div class="cluster-card-content">
+                <span class="cluster-tag">The Starting Problem</span>
+                <div class="cluster-title">How to Start Studying When You Don’t Feel Like It</div>
+                <div class="cluster-desc">Starting to study when you don’t feel like it is one of the most common problems students face. You may already know what to do, have your n…</div>
+              </div>
+            </a>
+            <a href="/why-starting-is-the-hardest-part-of-studying/" class="cluster-card">
+              <div class="card-doodle">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M20,50 Q80,-20 180,50 T340,50" stroke="#8B5CF6" stroke-width="40" fill="none" stroke-linecap="round"/></svg>
+              </div>
+              <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80" alt="Why Starting Is the Hardest Part of Studying" class="cluster-card-img" loading="lazy">
+              <div class="cluster-card-content">
+                <span class="cluster-tag">The Starting Problem</span>
+                <div class="cluster-title">Why Starting Is the Hardest Part of Studying</div>
+                <div class="cluster-desc">Starting is often the hardest part of studying. You may have time, a plan, and everything ready, yet still struggle to begin. Once you start…</div>
+              </div>
+            </a>
+            <a href="/why-you-cant-start-studying/" class="cluster-card">
+              <div class="card-doodle">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path d="M10,100 C30,30 150,150 190,50" stroke="#8B5CF6" stroke-width="50" fill="none" stroke-linecap="round"/></svg>
+              </div>
+              <img src="https://images.unsplash.com/photo-1513128034602-7571f0b14e24?auto=format&fit=crop&w=1200&q=80" alt="Why You Can’t Start Studying (And How to Fix It)" class="cluster-card-img" loading="lazy">
+              <div class="cluster-card-content">
+                <span class="cluster-tag">The Starting Problem</span>
+                <div class="cluster-title">Why You Can’t Start Studying (And How to Fix It)</div>
+                <div class="cluster-desc">If you struggle to start studying, you are not alone. Many students sit down with the intention to study but end up doing something else ins…</div>
+              </div>
+            </a>
+            <a href="/the-real-reason-you-cant-start-studying/" class="cluster-card">
+              <div class="card-doodle">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect x="40" y="40" width="120" height="120" rx="40" fill="#8B5CF6" transform="rotate(45 100 100)"/></svg>
+              </div>
+              <img src="https://images.unsplash.com/photo-1471107340929-a87cd0f5b5f3?auto=format&fit=crop&w=1200&q=80" alt="The Real Reason You Can’t Start Studying" class="cluster-card-img" loading="lazy">
+              <div class="cluster-card-content">
+                <span class="cluster-tag">The Starting Problem</span>
+                <div class="cluster-title">The Real Reason You Can’t Start Studying</div>
+                <div class="cluster-desc">If you find yourself unable to start studying, the problem is usually not laziness. Most of the time, the real reason is mental resistance.</div>
+              </div>
+            </a></div>
+    </section>
+    
+    </article>
+
+    <aside class="sidebar">
+      <div class="sidebar-widget velo-promo">
+        <div class="promo-title">Try Velo</div>
+        <p class="promo-desc">Ready to turn these insights into action? Start your focused study session without friction.</p>
+        <ul class="promo-features">
+          <li>One-click focus timer</li>
+          <li>Distraction-free mode</li>
+          <li>No sign-up required</li>
+        </ul>
+        <a href="https://getvelo.vercel.app/#/" class="promo-btn">Start Studying Now</a>
+      </div>
+
+      <div class="sidebar-widget ad-container">
+        <span class="ad-label">Advertisement</span>
+        <div class="ad-placeholder">Ad Space</div>
+      </div>
+      
+      <div class="sidebar-widget ad-container" style="margin-top: 12px;">
+         <span class="ad-label">Advertisement</span>
+         <div class="ad-placeholder" style="height: 400px;">Ad Space</div>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    window.addEventListener('scroll', function() {
+      const article = document.querySelector('.main-content');
+      if (!article) return;
+      const rect = article.getBoundingClientRect();
+      const total = article.scrollHeight - window.innerHeight;
+      const scrolled = Math.max(0, -rect.top);
+      const pct = Math.min(100, (scrolled / total) * 100);
+      document.getElementById('progressBar').style.width = pct + '%';
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
