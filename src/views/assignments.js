@@ -3,11 +3,12 @@
    Variant Modern Tracking Style
    ============================================ */
 
-import {
-  getAssignments, addAssignment, toggleAssignment, deleteAssignment,
+import { getAssignments, addAssignment, toggleAssignment, deleteAssignment,
   getUrgency, formatDeadline, formatDuration
 } from '../data/store.js';
 import { navigate } from '../app.js';
+
+let hasShownAutoStart = false;
 
 const SVGS = {
   check: `<svg class="icon" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>`,
@@ -41,9 +42,12 @@ export function renderAssignments(container) {
         <input type="text" class="quick-add-input" id="quick-add-input" placeholder="+ Add assignment..." autocomplete="off" />
       </div>
 
-      <div class="today-section">
+      <div class="today-section" style="flex-wrap: wrap;">
         <h2 class="today-title">Today</h2>
         <span class="today-count">${todayDueCount > 0 ? `${todayDueCount} tasks due today` : 'No tasks due'}</span>
+        <div class="time-suggestion anim-fade-up" style="flex-basis: 100%; margin-top: 8px; font-size: 13px; color: var(--color-primary-dark); font-weight: 600;">
+          ${getTimeSuggestion()}
+        </div>
       </div>
     </header>
     
@@ -208,7 +212,76 @@ export function renderAssignments(container) {
   }
 
   renderList();
-  return null;
+
+  // ─── Auto Start Flow Logic ───
+  let cleanupAutoStart = () => {};
+  
+  // We use a module-level variable 'hasShownAutoStart' to ensure we only show it once per web-app load
+  if (!hasShownAutoStart) {
+    let activityTimer = null;
+
+    const showAutoStartPopup = () => {
+      // Don't show if the user already navigated away
+      if (!document.body.contains(container)) return;
+      
+      hasShownAutoStart = true;
+      cleanupListeners();
+      
+      const popup = document.createElement('div');
+      popup.className = 'auto-start-popup';
+      popup.innerHTML = `
+        <div class="auto-start-inner">
+          <p>Start a 25 min session?</p>
+          <div class="auto-start-actions">
+            <button class="btn btn-secondary btn-sm" id="btn-autostart-no">Not now</button>
+            <button class="btn btn-primary btn-sm" id="btn-autostart-yes">Start</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(popup);
+      
+      // Delay to allow DOM attachment before fade-in
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => popup.classList.add('visible'));
+      });
+      
+      popup.querySelector('#btn-autostart-no').addEventListener('click', () => {
+        popup.classList.remove('visible');
+        setTimeout(() => popup.remove(), 400);
+      });
+      
+      popup.querySelector('#btn-autostart-yes').addEventListener('click', () => {
+        popup.classList.remove('visible');
+        setTimeout(() => {
+          popup.remove();
+          navigate('#/focus'); // Jumps straight into active session
+        }, 300);
+      });
+    };
+
+    const resetActivityTimer = () => {
+      if (activityTimer) clearTimeout(activityTimer);
+      activityTimer = setTimeout(showAutoStartPopup, 5000);
+    };
+
+    const cleanupListeners = () => {
+      if (activityTimer) clearTimeout(activityTimer);
+      window.removeEventListener('mousemove', resetActivityTimer);
+      window.removeEventListener('keydown', resetActivityTimer);
+      window.removeEventListener('touchstart', resetActivityTimer);
+    };
+
+    window.addEventListener('mousemove', resetActivityTimer, { passive: true });
+    window.addEventListener('keydown', resetActivityTimer, { passive: true });
+    window.addEventListener('touchstart', resetActivityTimer, { passive: true });
+    
+    resetActivityTimer();
+    cleanupAutoStart = cleanupListeners;
+  }
+
+  return () => {
+    cleanupAutoStart();
+  };
 }
 
 function urgencyDotClass(urgency) {
@@ -299,4 +372,12 @@ function formatDateForInput(date) {
   const h = String(date.getHours()).padStart(2, '0');
   const min = String(date.getMinutes()).padStart(2, '0');
   return `${y}-${m}-${d}T${h}:${min}`;
+}
+
+function getTimeSuggestion() {
+  const hour = new Date().getHours();
+  if (hour < 12) return 'Good time to start your first session';
+  if (hour < 17) return 'You have some time now — start a quick session';
+  if (hour < 22) return 'One last session before you wrap up?';
+  return 'You have 20 min? Start a quick session';
 }

@@ -247,6 +247,48 @@ export function getDailyFocusTimes(days = 7) {
   return result.reverse();
 }
 
+/**
+ * Calculate the current daily learning streak
+ */
+export function getCurrentStreak() {
+  const sessions = getSessions();
+  if (sessions.length === 0) return 0;
+
+  // Get unique local dates of all sessions
+  const uniqueDates = Array.from(new Set(sessions.map(s => {
+    const d = new Date(s.timestamp);
+    return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+  })));
+  
+  const today = new Date();
+  const todayStr = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yesterdayStr = `${yesterday.getFullYear()}-${yesterday.getMonth()}-${yesterday.getDate()}`;
+
+  // If the last session wasn't today or yesterday, streak is broken
+  if (uniqueDates[0] !== todayStr && uniqueDates[0] !== yesterdayStr) {
+    return 0;
+  }
+
+  let streak = 0;
+  let currentDate = new Date(uniqueDates[0]); // Start counting backwards from the most recent day
+
+  for (let i = 0; i < uniqueDates.length; i++) {
+    const dStr = uniqueDates[i];
+    const expectedStr = `${currentDate.getFullYear()}-${currentDate.getMonth()}-${currentDate.getDate()}`;
+    
+    if (dStr === expectedStr) {
+      streak++;
+      currentDate.setDate(currentDate.getDate() - 1); // Move to previous day
+    } else {
+      break;
+    }
+  }
+
+  return streak;
+}
+
 // ─── Utility: Deadline urgency ───
 
 /**

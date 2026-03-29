@@ -2,7 +2,7 @@
    Velo — Focus Mode View (Risograph Style)
    ============================================ */
 
-import { getAssignments, addSession, getAssignment, formatDuration } from '../data/store.js';
+import { getAssignments, addSession, getAssignment, formatDuration, getCurrentStreak } from '../data/store.js';
 import { navigate } from '../app.js';
 import { timerState, FOCUS_DURATION, BREAK_DURATION } from '../data/timerStore.js';
 import { trackEvent } from '../analytics.js';
@@ -178,14 +178,21 @@ function finishSessionAndExit(container) {
     timeString = `${mins} minute${mins !== 1 ? 's' : ''}${secs > 0 ? ` and ${secs} second${secs !== 1 ? 's' : ''}` : ''}`;
   }
 
+  const streak = getCurrentStreak();
+
   // Render minimal session complete screen
   container.innerHTML = `
     <div class="focus-fullscreen-container" style="justify-content: center; align-items: center; background: var(--color-bg); padding: 24px;">
       <div style="text-align: center; max-width: 400px;">
-        <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 12px; font-family: var(--font-sans);">Session Complete</h2>
-        <div style="font-size: 18px; color: var(--color-text-secondary); margin-bottom: 40px; font-weight: 500;">
+        <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 12px; font-family: var(--font-sans); display: flex; align-items: center; justify-content: center; gap: 8px;">
+           <span class="anim-pop-check" style="color: var(--color-success);">${SVGS.check}</span>
+           Session Complete
+        </h2>
+        <div style="font-size: 18px; color: var(--color-text-secondary); margin-bottom: 16px; font-weight: 500;">
           You focused for ${timeString}
         </div>
+        
+        ${streak > 0 ? `<div class="anim-fade-up" style="font-size: 15px; font-weight: 700; color: #ff9500; margin-bottom: 40px; text-transform: uppercase;">🔥 ${streak} day streak</div>` : '<div style="margin-bottom: 40px;"></div>'}
         
         <div style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
           <button class="btn btn-primary btn-lg" id="btn-session-done" style="width: 100%;">Done</button>
