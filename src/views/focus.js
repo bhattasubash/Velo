@@ -6,6 +6,7 @@ import { getAssignments, addSession, getAssignment, formatDuration, getCurrentSt
 import { navigate } from '../app.js';
 import { timerState, FOCUS_DURATION, BREAK_DURATION } from '../data/timerStore.js';
 import { trackEvent } from '../analytics.js';
+import { ARTICLES } from '../data/articlesList.js';
 
 let currentKeydownHandler = null;
 
@@ -179,6 +180,7 @@ function finishSessionAndExit(container) {
   }
 
   const streak = getCurrentStreak();
+  const suggestion = [...ARTICLES].sort(() => 0.5 - Math.random())[0];
 
   // Render minimal session complete screen
   container.innerHTML = `
@@ -192,8 +194,13 @@ function finishSessionAndExit(container) {
           You focused for ${timeString}
         </div>
         
-        ${streak > 0 ? `<div class="anim-fade-up" style="font-size: 15px; font-weight: 700; color: #ff9500; margin-bottom: 40px; text-transform: uppercase;">🔥 ${streak} day streak</div>` : '<div style="margin-bottom: 40px;"></div>'}
+        ${streak > 0 ? `<div class="anim-fade-up" style="font-size: 15px; font-weight: 700; color: #ff9500; margin-bottom: 24px; text-transform: uppercase;">🔥 ${streak} day streak</div>` : '<div style="margin-bottom: 24px;"></div>'}
         
+        <a href="/learn/${suggestion.slug}/" style="display: flex; flex-direction: column; background: rgba(0,0,0,0.03); border-radius: 8px; padding: 12px 16px; margin-bottom: 40px; text-decoration: none; text-align: left; transition: transform 0.2s;">
+          <div style="font-size: 11px; font-weight: 700; color: var(--color-primary-dark); text-transform: uppercase; margin-bottom: 4px;">Improve more</div>
+          <div style="font-size: 14px; font-weight: 700; color: var(--color-text-main);">${suggestion.title} <span style="color: var(--color-text-secondary);">→</span></div>
+        </a>
+
         <div style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
           <button class="btn btn-primary btn-lg" id="btn-session-done" style="width: 100%;">Done</button>
           <a href="https://forms.gle/GbQysnTp6RpJMZqK9" id="btn-feedback" target="_blank" class="btn btn-secondary btn-lg" style="width: 100%; text-decoration: none;">Give Feedback</a>

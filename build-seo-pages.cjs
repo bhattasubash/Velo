@@ -7,7 +7,7 @@ const srcDir = path.join(__dirname, 'src');
 const baseCss = fs.readFileSync(path.join(srcDir, 'styles', 'variables.css'), 'utf-8');
 
 function buildPage(slug, title, metaDescription, articleHTML, cluster, keywords) {
-    const pageDir = path.join(publicDir, slug);
+    const pageDir = path.join(publicDir, 'learn', slug);
     if (!fs.existsSync(pageDir)) {
         fs.mkdirSync(pageDir, { recursive: true });
     }
@@ -20,10 +20,10 @@ function buildPage(slug, title, metaDescription, articleHTML, cluster, keywords)
   <title>${title} | Velo</title>
   <meta name="description" content="${metaDescription}" />
   <meta name="keywords" content="${keywords}" />
-  <link rel="canonical" href="https://getvelo.vercel.app/${slug}/" />
+  <link rel="canonical" href="https://getvelo.vercel.app/learn/${slug}/" />
   <meta property="og:title" content="${title} | Velo" />
   <meta property="og:description" content="${metaDescription}" />
-  <meta property="og:url" content="https://getvelo.vercel.app/${slug}/" />
+  <meta property="og:url" content="https://getvelo.vercel.app/learn/${slug}/" />
   <meta property="og:type" content="article" />
   
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
@@ -371,6 +371,16 @@ function buildPage(slug, title, metaDescription, articleHTML, cluster, keywords)
       const pct = Math.min(100, (scrolled / total) * 100);
       document.getElementById('progressBar').style.width = pct + '%';
     }, { passive: true });
+
+    // Save reading progress to local storage so dashboard can pick it up
+    try {
+      localStorage.setItem('velo_last_read', JSON.stringify({
+        title: "${title}",
+        slug: "${slug}",
+        cluster: "${cluster}",
+        timestamp: Date.now()
+      }));
+    } catch (e) {}
   </script>
 
 </body>

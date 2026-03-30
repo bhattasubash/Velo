@@ -8,6 +8,7 @@ import { getAssignments, addAssignment, toggleAssignment, deleteAssignment,
 } from '../data/store.js';
 import { navigate } from '../app.js';
 import { trackEvent } from '../analytics.js';
+import { ARTICLES } from '../data/articlesList.js';
 
 let hasShownAutoStart = false;
 
@@ -59,6 +60,9 @@ export function renderAssignments(container) {
         <button class="filter-btn" data-filter="completed">Done</button>
       </div>
       <div id="assignment-list" class="assignment-list"></div>
+      
+      <!-- Recommended Content injected via JS later -->
+      <div id="recommended-articles-container" style="margin-top: 48px; border-top: 2px solid rgba(0,0,0,0.04); padding-top: 32px;"></div>
     </div>
   `;
 
@@ -222,6 +226,7 @@ export function renderAssignments(container) {
   }
 
   renderList();
+  renderArticlesSection(container);
 
   // ─── Auto Start Flow Logic ───
   let cleanupAutoStart = () => {};
@@ -297,6 +302,56 @@ export function renderAssignments(container) {
   return () => {
     cleanupAutoStart();
   };
+}
+
+function renderArticlesSection(container) {
+  const articlesEl = container.querySelector('#recommended-articles-container');
+  if (!articlesEl) return;
+
+  let lastRead = null;
+  try {
+    const raw = localStorage.getItem('velo_last_read');
+    if (raw) lastRead = JSON.parse(raw);
+  } catch(e) {}
+
+  // Pick 2 random articles
+  const recommended = [...ARTICLES].sort(() => 0.5 - Math.random()).slice(0, 2);
+
+  let html = `
+    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
+      <h2 style="font-size: 16px; font-weight: 800; color: var(--color-text-main);">Study Techniques</h2>
+      <button style="background: none; border: none; font-size: 13px; font-weight: 700; color: var(--color-primary-dark); cursor: pointer;" onclick="window.location.hash='#/learn'">View Library →</button>
+    </div>
+  `;
+
+  if (lastRead && (Date.now() - lastRead.timestamp < 1000 * 60 * 60 * 24 * 7)) {
+    // Show continue reading if read in the last 7 days
+    html += `
+      <a href="/learn/${lastRead.slug}/" style="display: flex; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.03); padding: 12px 16px; border-radius: 8px; text-decoration: none; margin-bottom: 24px; transition: transform 0.2s;">
+        <div>
+          <div style="font-size: 11px; font-weight: 700; color: var(--color-text-secondary); text-transform: uppercase; margin-bottom: 4px;">Continue Reading</div>
+          <div style="font-size: 14px; font-weight: 700; color: var(--color-text-main);">${lastRead.title}</div>
+        </div>
+        <div style="font-size: 20px; color: var(--color-text-secondary);">›</div>
+      </a>
+    `;
+  }
+
+  html += `
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      ${recommended.map(a => `
+        <a href="/learn/${a.slug}/" style="display: flex; gap: 16px; text-decoration: none; align-items: center; border: 1px solid rgba(0,0,0,0.04); padding: 12px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); transition: transform 0.2s;">
+          <img src="${a.heroImage}" style="width: 80px; height: 80px; object-fit: cover; border-radius: 6px; background: #eee;" />
+          <div style="flex: 1;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--color-primary-dark); text-transform: uppercase; margin-bottom: 6px;">${a.readTime} min read</div>
+            <h3 style="font-size: 15px; font-weight: 700; color: var(--color-text-main); line-height: 1.3;">${a.title}</h3>
+          </div>
+        </a>
+      `).join('')}
+    </div>
+  `;
+
+  articlesEl.innerHTML = html;
 }
 
 function urgencyDotClass(urgency) {

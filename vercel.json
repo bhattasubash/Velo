@@ -1,4 +1,11 @@
 {
+    "redirects": [
+        {
+            "source": "/:slug(a-simple-brain-hack-to-start-studying-in-5-seconds|best-study-routine-for-students-who-can|how-decision-fatigue-is-ruining-your-study-session|how-to-break-the-mental-block-that-stops-you-from-studying|how-to-build-discipline-to-study|how-to-build-a-habit-of-studying|how-to-focus-while-studying-and-not-get-distracted|how-to-get-into-focus-mode-instantly|how-to-remove-distractions-while-studying|how-to-start-studying-after-a-long-break|how-to-start-studying-late-at-night|how-to-start-studying-when-you-dont|how-to-start-studying-when-you-feel-mentally-tired|how-to-start-studying-when-you-feel-overwhelmed|how-to-stay-consistent-with-studying-every-day|how-to-stop-overthinking-and-just-start-studying|how-to-stop-procrastinating-and-start-studying|how-to-study-when-you-have-no-motivation|how-to-study-when-you-keep-getting-distracted-by-your-phone|how-to-study-without-over-planning-everything|how-to-study-without-overthinking|the-real-reason-you-cant-start-studying|the-study-hack-that-fixes-procrastination-instantly|this-one-trick-helped-me-start-studying-every-day|use-this-5-second-rule-to-start-studying-instantly|why-focusing-on-one-task-makes-students-better|why-starting-is-the-hardest-part-of-studying|why-you-cant-start-studying|why-your-brain-avoids-studying)",
+            "destination": "/learn/:slug",
+            "permanent": true
+        }
+    ],
     "headers": [
         {
             "source": "/sitemap.xml",

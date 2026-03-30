@@ -8,6 +8,7 @@ import { renderCalendar } from './views/calendar.js';
 import { renderTimer } from './views/timer.js';
 import { renderProgress } from './views/progress.js';
 import { renderFocusMode } from './views/focus.js';
+import { renderLearn } from './views/learn.js';
 
 // ─── Route Config (Clean SVGs) ───
 const ICONS = {
@@ -18,13 +19,16 @@ const ICONS = {
   // Play circle for focus
   timer: `<svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
   // Stats
-  stats: `<svg class="icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>`
+  stats: `<svg class="icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>`,
+  // Book/Library for learn route
+  learn: `<svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>`
 };
 
 const ROUTES = {
   '#/': { render: renderAssignments, label: 'Tasks', icon: ICONS.tasks, showNav: true },
   '#/calendar': { render: renderCalendar, label: 'Calendar', icon: ICONS.calendar, showNav: true },
   '#/timer': { render: renderTimer, label: 'Focus', icon: ICONS.timer, showNav: true },
+  '#/learn': { render: renderLearn, label: 'Learn', icon: ICONS.learn, showNav: true },
   '#/progress': { render: renderProgress, label: 'Stats', icon: ICONS.stats, showNav: true },
   '#/focus': { render: renderFocusMode, label: 'Focus Mode', icon: '', showNav: false }
 };

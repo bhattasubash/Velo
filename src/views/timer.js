@@ -6,6 +6,9 @@ import { getAssignments, addSession, getAssignment, formatDuration } from '../da
 import { timerState, FOCUS_DURATION, BREAK_DURATION } from '../data/timerStore.js';
 import { navigate } from '../app.js';
 import { trackEvent } from '../analytics.js';
+import { ARTICLES } from '../data/articlesList.js';
+
+let showAbandonMessage = false;
 
 const SVGS = {
   play: `<svg class="icon icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>`,
@@ -62,6 +65,13 @@ export function renderTimer(container) {
           <button class="btn btn-ghost mt-4" id="btn-timer-stop" style="color:var(--color-danger); font-size: 14px;">
             End Session Early
           </button>
+        ` : ''}
+
+        ${!timerState.isRunning && showAbandonMessage ? `
+          <a href="/learn/${[...ARTICLES].filter(a => a.cluster !== 'Habit & Consistency').sort(() => 0.5 - Math.random())[0].slug}/" class="anim-fade-up" style="display: inline-flex; flex-direction: column; text-decoration: none; text-align: left; background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.04); padding: 12px 16px; border-radius: 8px; margin-top: 24px; max-width: 300px; width: 100%;">
+            <span style="font-size: 11px; font-weight: 700; color: var(--color-primary-dark); text-transform: uppercase; margin-bottom: 2px;">Having trouble focusing?</span>
+            <span style="font-size: 13px; font-weight: 600; color: var(--color-text-main);">Read this technique →</span>
+          </a>
         ` : ''}
       </div>
 
@@ -125,6 +135,7 @@ export function renderTimer(container) {
 }
 
 function startTimer(container) {
+  showAbandonMessage = false;
   timerState.isRunning = true;
   timerState.isPaused = false;
   timerState.mode = 'focus';
@@ -159,6 +170,7 @@ function stopTimer(container) {
       time_spent: Math.round(time_spent_mins * 10) / 10, 
       percent_completed: Math.round(percent_completed) 
     });
+    showAbandonMessage = true;
   }
 
   if (timerState.elapsedFocusSeconds > 0 && timerState.assignmentId) {
