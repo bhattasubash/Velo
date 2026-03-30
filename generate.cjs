@@ -168,11 +168,31 @@ for (const file of files) {
     
     let pBuffer = [];
     let inList = false;
+    let pCount = 0;
     
     function flushP() {
         if (pBuffer.length > 0) {
             html += `<p>${pBuffer.join(' ')}</p>\n`;
             pBuffer = [];
+            pCount++;
+            
+            // Inject AdSense in-article ad after the 3rd paragraph
+            if (pCount === 3) {
+                html += `
+<!-- Google AdSense In-Article -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3712834243686011"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-3712834243686011"
+     data-ad-slot="3069675214"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+`;
+            }
         }
     }
     
