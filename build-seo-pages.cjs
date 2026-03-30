@@ -314,6 +314,10 @@ function buildPage(slug, title, metaDescription, articleHTML, cluster, keywords)
           y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
       })(window, document, "clarity", "script", "w3oyhz2619");
   </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3712834243686011"
+     crossorigin="anonymous"></script>
 </head>
 <body>
 
