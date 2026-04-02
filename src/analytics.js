@@ -3,6 +3,19 @@
    ============================================ */
 
 /**
+ * Initialize analytics and set up initial state.
+ * Called after user consent is granted or verified.
+ */
+export function initAnalytics() {
+  if (typeof window.gtag === 'function') {
+    // Analytics is handled via index.html scripts, but we can verify it's loaded
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      console.log('[Analytics] 🟢 Analytics Initialized (Consent Accepted)');
+    }
+  }
+}
+
+/**
  * Core event tracking utility.
  * Prevents errors if Adblockers block the GA tracking script,
  * but securely pushes robust product data when available.
