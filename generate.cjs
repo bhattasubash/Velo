@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { buildPage } = require('./build-seo-pages.cjs');
+const { buildPage, buildLearnIndex } = require('./build-seo-pages.cjs');
 
 const rawDir = path.join(__dirname, 'seo-articles-raw');
 const publicDir = path.join(__dirname, 'public');
@@ -481,6 +481,9 @@ for (const file of files) {
     sitemapUrls.push(`https://getvelo.vercel.app/learn/${slug}/`);
 }
 
+// Build static /learn/ directory hub page
+buildLearnIndex(allPages, clusters);
+
 const today = new Date().toISOString().split('T')[0];
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -488,6 +491,11 @@ const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
     <loc>https://getvelo.vercel.app/</loc>
     <lastmod>${today}</lastmod>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://getvelo.vercel.app/learn/</loc>
+    <lastmod>${today}</lastmod>
+    <priority>0.9</priority>
   </url>
 ${sitemapUrls.map(url => `  <url>\n    <loc>${url}</loc>\n    <lastmod>${today}</lastmod>\n    <priority>0.8</priority>\n  </url>`).join('\n')}
 </urlset>`;

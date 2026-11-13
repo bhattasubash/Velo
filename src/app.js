@@ -38,6 +38,7 @@ let deferredPrompt = null;
 
 export function initApp() {
   const app = document.getElementById('app');
+  if (app) app.innerHTML = ''; // Clear crawler fallback markup before mounting SPA
 
   // ─── PWA Install Banner ───
   const installBanner = document.createElement('div');

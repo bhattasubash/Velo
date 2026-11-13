@@ -320,7 +320,7 @@ function renderArticlesSection(container) {
   let html = `
     <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
       <h2 style="font-size: 16px; font-weight: 800; color: var(--color-text-main);">Study Techniques</h2>
-      <button style="background: none; border: none; font-size: 13px; font-weight: 700; color: var(--color-primary-dark); cursor: pointer;" onclick="window.location.hash='#/learn'">View Library →</button>
+      <a href="/learn/" style="text-decoration: none; font-size: 13px; font-weight: 700; color: var(--color-primary-dark);">View Library →</a>
     </div>
   `;
 
@@ -348,6 +348,16 @@ function renderArticlesSection(container) {
           </div>
         </a>
       `).join('')}
+    </div>
+    <div style="margin-top: 20px; padding: 16px; background: rgba(139, 92, 246, 0.05); border: 1px dashed rgba(139, 92, 246, 0.25); border-radius: 8px; text-align: center;">
+      <p style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 10px;">Overcome procrastination and focus blocks with our 29 evidence-based guides.</p>
+      <a href="/learn/" style="display: inline-block; font-size: 13px; font-weight: 700; color: var(--color-primary-dark); text-decoration: none; background: #fff; border: 1px solid var(--color-primary); padding: 8px 16px; border-radius: var(--radius-pill);">Browse All 29 Study Guides &rarr;</a>
+    </div>
+    <div style="text-align: center; margin-top: 24px; padding-bottom: 12px; font-size: 12px; color: var(--color-text-muted);">
+      <a href="/learn/" style="color: var(--color-text-muted); text-decoration: none;">Study Library</a> &bull;
+      <a href="/privacy.html" style="color: var(--color-text-muted); text-decoration: none;">Privacy Policy</a> &bull;
+      <a href="/terms.html" style="color: var(--color-text-muted); text-decoration: none;">Terms of Service</a> &bull;
+      <a href="https://github.com/bhattasubash/Velo" style="color: var(--color-text-muted); text-decoration: none;" target="_blank" rel="noopener">GitHub</a>
     </div>
   `;
 
