@@ -58,6 +58,183 @@ function getHeroImage(slug) {
     return articleImages[slug] || fallbackHero;
 }
 
+const takeawaysMap = {
+    'a-simple-brain-hack-to-start-studying-in-5-seconds': [
+        'Count down 5-4-3-2-1 and take immediate physical action before your brain generates excuses.',
+        'Focus on a frictionless first step like opening your notebook or starting a 5-minute timer.',
+        'Counting shifts brain activity from passive hesitation to active, prefrontal execution.',
+        'Momentum builds naturally once the first micro-action is completed.'
+    ],
+    'best-study-routine-for-students-who-can': [
+        'Rigid, multi-hour study schedules fail because they ignore cognitive energy fluctuations.',
+        'Anchor sessions around minimum daily non-negotiables (e.g., one 25-minute Pomodoro) rather than ideal targets.',
+        'Schedule study blocks at consistent times to remove the mental friction of deciding when to begin.',
+        'Prioritize starting consistency over session length to build sustainable long-term study momentum.'
+    ],
+    'how-decision-fatigue-is-ruining-your-study-session': [
+        'Every micro-decision (what to study, where to start, what playlist to play) drains willpower before actual work begins.',
+        'Plan your exact study subject and initial task the night before to eliminate morning hesitation.',
+        'Standardize your study setup and timer intervals so execution requires zero real-time decisions.',
+        'Preserve mental energy for high-order comprehension rather than session logistics.'
+    ],
+    'how-to-break-the-mental-block-that-stops-you-from-studying': [
+        'Mental blocks are emotional threat responses to perceived task difficulty, failure anxiety, or perfectionism.',
+        'Lower the activation threshold by committing to a draft that is intentionally rough or messy.',
+        'Deconstruct large assignments into single, 2-minute actionable steps to disarm task overwhelm.',
+        'A short physical change of environment (switching rooms, stepping outside) resets mental stalling.'
+    ],
+    'how-to-build-a-habit-of-studying': [
+        'Habits depend on clear cues and immediate rewards, not fluctuating daily willpower.',
+        'Tie studying to an existing daily trigger (e.g., right after morning coffee or arriving back from class).',
+        'Start with an easy 15-minute daily baseline until the behavior becomes automated and instinctive.',
+        'Track completion streaks visually to reinforce your identity as a consistent student.'
+    ],
+    'how-to-build-discipline-to-study': [
+        'Discipline is an engineered operating system, while motivation is an unreliable emotional state.',
+        'Create physical separation from high-dopamine distractions before opening your study materials.',
+        'Focus on honoring your start time regardless of emotional readiness or mood.',
+        'Consistency creates competence, which eventually generates natural intrinsic motivation.'
+    ],
+    'how-to-focus-while-studying-and-not-get-distracted': [
+        'Attention is easily hijacked when alternative stimuli are immediately accessible within reach.',
+        'Practice single-tasking by keeping only one tab, one window, or one notebook page open at a time.',
+        'Keep a distraction scratchpad nearby to write down unrelated thoughts for later without leaving your task.',
+        'Use structured work sprints (25–50 minutes) paired with intentional, screen-free rest intervals.'
+    ],
+    'how-to-get-into-focus-mode-instantly': [
+        'Flow state requires an established transition ritual that signals the brain it is time to concentrate.',
+        'Clear your immediate visual workspace to eliminate subliminal environmental triggers.',
+        'Define a singular, unambiguous objective for the session before starting your timer.',
+        'Use consistent audio cues like instrumental focus tracks or brown noise to anchor attention.'
+    ],
+    'how-to-remove-distractions-while-studying': [
+        'Friction determines behavior: increase friction for distractions and decrease friction for studying.',
+        'Place your smartphone in another room or inside a drawer to eliminate proximity-induced checking.',
+        'Use website blockers to seal off distracting social and video feeds during study hours.',
+        'Communicate boundaries to roommates or family members before beginning deep focus sessions.'
+    ],
+    'how-to-start-studying-after-a-long-break': [
+        'Returning after a break triggers resistance because your study endurance and routines have decayed.',
+        'Do not attempt your peak pre-break workload on day one; ramp up progressively over several days.',
+        'Begin by reviewing previous notes or organizing upcoming materials to build comfort with the material.',
+        'Forgive the temporary drop in speed and focus purely on establishing daily study cadence.'
+    ],
+    'how-to-start-studying-late-at-night': [
+        'Late-night studying requires careful cognitive management to counter declining prefrontal stamina.',
+        'Switch to active recall and problem-solving rather than passive reading to stay alert.',
+        'Optimize lighting by avoiding dim environments that stimulate melatonin production.',
+        'Set a strict cutoff time to protect sleep quality, which is essential for memory consolidation.'
+    ],
+    'how-to-start-studying-when-you-dont': [
+        'Emotional reluctance to study is normal; you do not need to feel like studying in order to begin.',
+        'Commit to the 5-Minute Rule: sit down and engage with the material for just 300 seconds.',
+        'Begin with low-friction tasks (organizing flashcards, skimming headings) to break initial inertia.',
+        'Once the initial barrier is crossed, cognitive resistance drops and continuation feels natural.'
+    ],
+    'how-to-start-studying-when-you-feel-mentally-tired': [
+        'Mental exhaustion impairs heavy analytical thinking but can still support lighter cognitive tasks.',
+        'Adjust task intensity: switch from complex problem sets to flashcard review or educational video review.',
+        'Hydrate, step away from screens for a 10-minute walk, and wash your face to reset sensory alertness.',
+        'Keep study blocks short (15–20 minutes) with frequent physical movement breaks.'
+    ],
+    'how-to-start-studying-when-you-feel-overwhelmed': [
+        'Overwhelm happens when your working memory attempts to process entire semesters simultaneously.',
+        'Conduct a rapid brain dump on paper to externalize all pending tasks and looming deadlines.',
+        'Select exactly one task, hide everything else from view, and work on that single piece.',
+        'Remember that taking any concrete action immediately shrinks the emotional weight of panic.'
+    ],
+    'how-to-stay-consistent-with-studying-every-day': [
+        'Consistency is preserved by setting achievable floor targets rather than ambitious ceiling targets.',
+        'Never break the chain twice: if life disrupts one day, resume the routine immediately the next day.',
+        'Anchor study sessions to fixed daily events (like post-breakfast or post-workout) to build automaticity.',
+        'Prioritize daily frequency and habit strength over marathon, irregular cramming sessions.'
+    ],
+    'how-to-stop-overthinking-and-just-start-studying': [
+        'Overthinking is a covert form of procrastination disguised as preparation.',
+        'Replace complex planning rituals with immediate, imperfect physical action.',
+        'Set a 2-minute decision timer to choose what to study and commit without second-guessing.',
+        'Treat the first draft or study session as an experiment where flaws and mistakes are welcomed.'
+    ],
+    'how-to-stop-procrastinating-and-start-studying': [
+        'Procrastination is an emotional regulation problem, not a character flaw or time management issue.',
+        'Identify the underlying fear (fear of failure, fear of judgment, or dread of boredom) fueling avoidance.',
+        'Shrink the initial step until resistance vanishes (e.g., read just one paragraph or solve one equation).',
+        'Use timed focus sprints to bypass anticipation dread and prove to yourself that the work is manageable.'
+    ],
+    'how-to-study-when-you-have-no-motivation': [
+        'Motivation is a feeling that follows action, not a requirement that must precede it.',
+        'Rely on environmental constraints and routines to carry you through low-willpower days.',
+        'Use micro-commitments: tell yourself you can stop after 10 minutes if you genuinely want to.',
+        'Focus on the identity of being someone who shows up, regardless of emotional weather.'
+    ],
+    'how-to-study-when-you-keep-getting-distracted-by-your-phone': [
+        'Willpower cannot compete against notification algorithms engineered for dopamine capture.',
+        'Introduce physical distance by keeping your phone in another room or inside a backpack.',
+        'Turn on grayscale mode to remove the visual appeal of colorful app icons and alerts.',
+        'Replace the phone-checking reflex with an analog alternative, like jotting down notes on paper.'
+    ],
+    'how-to-study-without-over-planning-everything': [
+        'Over-planning gives a false sense of achievement while keeping actual learning at zero.',
+        'Cap planning time to a maximum of 5–10 minutes per day using a simple bullet-point checklist.',
+        'Focus on the next single hour rather than creating intricate schedules weeks into the future.',
+        'Measure productivity by questions solved and pages understood, not by schedule aesthetic.'
+    ],
+    'how-to-study-without-overthinking': [
+        'Analysis paralysis occurs when your mind obsesses over the overall magnitude of the syllabus.',
+        'Shift focus from the finish line to the immediate micro-action happening right now.',
+        'Ground runaway thoughts using concrete sensory anchors (writing by hand, speaking aloud).',
+        'Accept that imperfect, messy studying produces infinitely higher retention than zero studying.'
+    ],
+    'the-real-reason-you-cant-start-studying': [
+        'The true barrier to starting is the emotional discomfort of transitioning from low to high effort.',
+        'Your brain is biologically wired to conserve glucose and energy, treating intense study as friction.',
+        'Recognizing this transition resistance as temporary biology removes personal guilt and hesitation.',
+        'The discomfort peaks during the first 3–5 minutes and drops sharply once immersion occurs.'
+    ],
+    'the-study-hack-that-fixes-procrastination-instantly': [
+        'Lower the barrier of entry by defining a ridiculously easy first step that requires zero effort.',
+        'Pair the start of study with a sensory ritual (lighting a desk lamp, opening a focus app, playing lo-fi).',
+        'Reframe the goal from finishing the chapter to simply starting the clock for 10 minutes.',
+        'Action creates clarity and motivation; do not wait for motivation to spark action.'
+    ],
+    'this-one-trick-helped-me-start-studying-every-day': [
+        'Anchor study initiation to a microscopic, failure-proof trigger (the 2-minute rule).',
+        'Prepare your desk and learning materials the evening before so your morning has zero setup friction.',
+        'Focus on showing up at your desk at the appointed time rather than the volume of output.',
+        'Consistency in start time trains your circadian rhythm to expect mental exertion automatically.'
+    ],
+    'use-this-5-second-rule-to-start-studying-instantly': [
+        'There is a 5-second window between an impulse to study and the brain’s rationalization to delay.',
+        'Counting backward 5-4-3-2-1 interrupts excuse generation and forces prefrontal engagement.',
+        'Move physically on 1 (open your notebook, launch your study timer, or put on headphones).',
+        'Repeated daily use turns the countdown into an automated psychological trigger for deep work.'
+    ],
+    'why-focusing-on-one-task-makes-students-better': [
+        'Multitasking splits cognitive bandwidth, leaving attention residue that degrades retention and speed.',
+        'Single-tasking allows full working memory allocation to deep conceptual comprehension.',
+        'Mono-focus completes assignments significantly faster with dramatically fewer errors.',
+        'Protect your focus stream by closing unrelated browser tabs, background chats, and social feeds.'
+    ],
+    'why-starting-is-the-hardest-part-of-studying': [
+        'Static friction in physics is always higher than kinetic friction; studying obeys the same principle.',
+        'The psychological dread of an assignment is almost always worse than the actual work itself.',
+        'Once you break the starting threshold, neurochemicals like dopamine sustain your engagement.',
+        'Design your study strategy around making the first 60 seconds as effortless as humanly possible.'
+    ],
+    'why-you-cant-start-studying': [
+        'Inability to start stems from vague goals, fear of failure, or acute cognitive fatigue.',
+        'Turn vague intentions into concrete, bite-sized tasks (e.g., read pages 42-45).',
+        'Reduce intimidation by working in short, manageable 20–25 minute intervals.',
+        'Forgive past procrastination immediately; self-compassion boosts subsequent task engagement.'
+    ],
+    'why-your-brain-avoids-studying': [
+        'The brain evolved to seek high-dopamine, low-effort rewards to conserve energy for survival.',
+        'Academic studying offers delayed rewards and high cognitive strain, triggering avoidance reflexes.',
+        'Overcome evolutionary resistance by creating artificial immediate rewards and clear milestones.',
+        'Structure work into bite-sized Pomodoros so your brain perceives the effort as safe and limited.'
+    ]
+};
+
 // Clean formatting is now done inline in the main loop
 
 let sitemapUrls = [];
@@ -140,15 +317,34 @@ for (const file of files) {
     const pageData = allPages.find(p => p.slug === slug);
     const readTime = pageData ? pageData.readTime : 5;
 
+    const takeaways = takeawaysMap[slug] || [
+        "Commit to a small, frictionless first step to overcome initial study hesitation.",
+        "Use structured focus intervals to maintain cognitive endurance and prevent fatigue.",
+        "Design your environment to minimize friction for studying and maximize friction for distractions.",
+        "Focus on consistent daily action rather than waiting for unpredictable emotional motivation."
+    ];
+
+    const takeawaysHtml = `
+    <div class="key-takeaways" aria-label="Key Takeaways">
+        <div class="key-takeaways-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            Key Takeaways
+        </div>
+        <ul>
+            ${takeaways.map(t => `<li>${t}</li>`).join('\n            ')}
+        </ul>
+    </div>`;
+
     let html = `<h1>${title}</h1>
     <div class="article-meta">
         <img src="/author.png" alt="Subash Bhatta" class="author-photo">
         <div class="author-info">
             <strong>Subash Bhatta</strong>
-            <span>Updated March 2026 &bull; ${readTime} min read</span>
+            <span>Updated November 2026 &bull; ${readTime} min read</span>
         </div>
     </div>
     <img src="${heroImage}" alt="${title}" class="hero-image" loading="lazy">
+    ${takeawaysHtml}
     <div class="article-content">
     `;
     
@@ -280,17 +476,20 @@ for (const file of files) {
     </section>
     `;
 
-    buildPage(slug, title, metaDescription, html, cluster, title.split(' ').join(', '));
+    const today = new Date().toISOString().split('T')[0];
+    buildPage(slug, title, metaDescription, html, cluster, heroImage, '2026-03-29', today);
     sitemapUrls.push(`https://getvelo.vercel.app/learn/${slug}/`);
 }
 
+const today = new Date().toISOString().split('T')[0];
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://getvelo.vercel.app/</loc>
+    <lastmod>${today}</lastmod>
     <priority>1.0</priority>
   </url>
-${sitemapUrls.map(url => `  <url>\n    <loc>${url}</loc>\n    <priority>0.8</priority>\n  </url>`).join('\n')}
+${sitemapUrls.map(url => `  <url>\n    <loc>${url}</loc>\n    <lastmod>${today}</lastmod>\n    <priority>0.8</priority>\n  </url>`).join('\n')}
 </urlset>`;
 fs.writeFileSync(path.join(publicDir, 'sitemap.xml'), sitemapXml);
 

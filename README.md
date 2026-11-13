@@ -38,15 +38,15 @@ An integrated editorial library featuring curated study techniques and productiv
 - **Deep Work Focus Mode**: A dedicated, distraction-free timer optimized for maximum immersion.
 - **Unified Calendar**: A clear timeline of upcoming academic commitments.
 - **Progress Insights**: Performance analytics to track consistency and session history.
-- **PWA Engineering**: Full offline support and installable directly to the OS for instant access.
-- **Frictionless Onboarding**: No accounts or sign-ups required. Your data remains local and secure.
+- **PWA Engineering**: Full offline support and installable directly to your device for instant access.
+- **Frictionless Onboarding**: 100% free with no accounts or sign-ups required. Your tasks, timers, and logs stay stored locally on your device.
 
 ## Tech Stack
 
 - **Core**: Vanilla JavaScript (ESNext), HTML5, CSS3
 - **Build**: Vite
-- **PWA**: Service Workers with advanced caching strategies
-- **Analytics**: GA4 & Microsoft Clarity for privacy-aware insights
+- **PWA**: Service Workers with cache-first static delivery
+- **Analytics & Ads**: GA4 & Microsoft Clarity for usage insights, supported by non-intrusive Google AdSense (tasks and study notes never leave your browser)
 - **Deployment**: Vercel
 
 ## How it Works

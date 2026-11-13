@@ -1,0 +1,55 @@
+# Velo
+
+> Velo is a fast, distraction-free study companion and Progressive Web App (PWA) engineered for students. It unifies task management, a Pomodoro focus timer, academic calendar scheduling, session analytics, and an evidence-based library of study frameworks into a single lightweight workspace.
+
+- Website: https://getvelo.vercel.app/
+- Target Audience: High school, undergraduate, and graduate students seeking low-friction academic productivity tools.
+- Operating Model: 100% free and ad-supported, no account or sign-up required. Tasks, timers, and schedules stay stored locally on your device; standard web analytics (Google Analytics 4, Microsoft Clarity) and Google AdSense are utilized.
+
+## Core Capabilities
+
+- [Study Dashboard](https://getvelo.vercel.app/#/): Centralized task and assignment tracker with deadline countdowns, status filtering, and prioritization.
+- [Focus Timer & Pomodoro](https://getvelo.vercel.app/#/timer): Distraction-free study timer supporting 25/5 Pomodoro intervals, custom session lengths, and immersive full-screen deep work mode.
+- [Academic Calendar](https://getvelo.vercel.app/#/calendar): Clear chronological visual timeline of upcoming assignments and academic milestones.
+- [Progress Insights](https://getvelo.vercel.app/#/progress): Session history logs, completion consistency tracking, and productivity analytics.
+- [Learn Library](https://getvelo.vercel.app/#/learn): Curated evidence-based academic guides tackling procrastination, cognitive fatigue, and focus discipline.
+
+## Academic Guides & Study Frameworks
+
+### The Starting Problem & Overcoming Resistance
+
+- [A Simple Brain Hack to Start Studying in 5 Seconds](https://getvelo.vercel.app/learn/a-simple-brain-hack-to-start-studying-in-5-seconds/): How the 5-4-3-2-1 countdown rule interrupts hesitation and forces prefrontal action.
+- [How to Start Studying When You Don't Feel Like It](https://getvelo.vercel.app/learn/how-to-start-studying-when-you-dont/): Using the 5-minute micro-commitment rule to dissolve emotional inertia.
+- [Why Starting Is the Hardest Part of Studying](https://getvelo.vercel.app/learn/why-starting-is-the-hardest-part-of-studying/): The physics of cognitive friction and how behavioral momentum sustains focus.
+- [Why You Can't Start Studying](https://getvelo.vercel.app/learn/why-you-cant-start-studying/): Root psychological blockers behind study inertia and practical tactical fixes.
+- [The Real Reason You Can't Start Studying](https://getvelo.vercel.app/learn/the-real-reason-you-cant-start-studying/): Separating motivation myths from biological transition friction.
+- [This One Trick Helped Me Start Studying Every Day](https://getvelo.vercel.app/learn/this-one-trick-helped-me-start-studying-every-day/): Implementing failure-proof micro-anchors to automate daily study initiation.
+- [How to Start Studying When You Feel Mentally Tired](https://getvelo.vercel.app/learn/how-to-start-studying-when-you-feel-mentally-tired/): Low-energy review strategies to sustain momentum without cognitive burnout.
+- [How to Start Studying When You Feel Overwhelmed](https://getvelo.vercel.app/learn/how-to-start-studying-when-you-feel-overwhelmed/): De-escalating academic panic through single-item triage and brain-dump externalization.
+
+### Focus & Distractions
+
+- [How Decision Fatigue Is Ruining Your Study Session](https://getvelo.vercel.app/learn/how-decision-fatigue-is-ruining-your-study-session/): Eliminating mid-session logistics and micro-choices that deplete willpower.
+- [How to Focus While Studying and Not Get Distracted](https://getvelo.vercel.app/learn/how-to-focus-while-studying-and-not-get-distracted/): Designing environmental barriers to stop stimulus-switching and attention hijacking.
+- [How to Get Into Focus Mode Instantly](https://getvelo.vercel.app/learn/how-to-get-into-focus-mode-instantly/): Pre-session priming rituals that trigger rapid deep flow states.
+- [How to Remove Distractions While Studying](https://getvelo.vercel.app/learn/how-to-remove-distractions-while-studying/): Auditing physical and digital cues to protect working memory.
+- [How to Study When You Keep Getting Distracted by Your Phone](https://getvelo.vercel.app/learn/how-to-study-when-you-keep-getting-distracted-by-your-phone/): Structural techniques to break compulsive notification-checking reflexes.
+- [Why Focusing on One Task Makes Students Better](https://getvelo.vercel.app/learn/why-focusing-on-one-task-makes-students-better/): The neurological penalty of attention residue and the benefits of mono-tasking.
+- [How to Stop Overthinking and Just Start Studying](https://getvelo.vercel.app/learn/how-to-stop-overthinking-and-just-start-studying/): Replacing perfectionist analysis paralysis with action-first heuristics.
+- [How to Study Without Overthinking](https://getvelo.vercel.app/learn/how-to-study-without-overthinking/): Grounding mental chatter into concrete physical study routines.
+
+### Habit & Consistency
+
+- [Best Study Routine for Students Who Can't Stay Consistent](https://getvelo.vercel.app/learn/best-study-routine-for-students-who-can/): Building durable routines around baseline minimums rather than idealized schedules.
+- [How to Build a Habit of Studying](https://getvelo.vercel.app/learn/how-to-build-a-habit-of-studying/): Trigger-routine-reward architecture tailored to college course loads.
+- [How to Build Discipline to Study](https://getvelo.vercel.app/learn/how-to-build-discipline-to-study/): Shifting from fickle emotional motivation to reliable structural discipline.
+- [How to Start Studying After a Long Break](https://getvelo.vercel.app/learn/how-to-start-studying-after-a-long-break/): Re-acclimating cognitive endurance after vacations or illness without self-criticism.
+- [How to Start Studying Late at Night](https://getvelo.vercel.app/learn/how-to-start-studying-late-at-night/): Night-session protocols to maximize retention while managing fatigue and sleep quality.
+- [How to Stay Consistent with Studying Every Day](https://getvelo.vercel.app/learn/how-to-stay-consistent-with-studying-every-day/): Maintaining streak momentum with low-friction daily minimum quotas.
+- [How to Stop Procrastinating and Start Studying](https://getvelo.vercel.app/learn/how-to-stop-procrastinating-and-start-studying/): Systematic root-cause solutions for chronic academic avoidance.
+- [How to Study When You Have No Motivation](https://getvelo.vercel.app/learn/how-to-study-when-you-have-no-motivation/): Operating on systematic routines when willpower and enthusiasm are zero.
+- [How to Study Without Over-Planning Everything](https://getvelo.vercel.app/learn/how-to-study-without-over-planning-everything/): Why productive procrastination in planning ruins study execution.
+- [The Study Hack That Fixes Procrastination Instantly](https://getvelo.vercel.app/learn/the-study-hack-that-fixes-procrastination-instantly/): Rapid mental reframing techniques for instant study activation.
+- [How to Break the Mental Block That Stops You From Studying](https://getvelo.vercel.app/learn/how-to-break-the-mental-block-that-stops-you-from-studying/): Diagnostic methods to dissolve sudden academic roadblocks and anxiety.
+- [Use This 5-Second Rule to Start Studying Instantly](https://getvelo.vercel.app/learn/use-this-5-second-rule-to-start-studying-instantly/): Countdown psychology applied specifically to academic deep work.
+- [Why Your Brain Avoids Studying](https://getvelo.vercel.app/learn/why-your-brain-avoids-studying/): The evolutionary biology of cognitive energy preservation and how to overcome it.

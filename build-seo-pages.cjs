@@ -6,7 +6,7 @@ const srcDir = path.join(__dirname, 'src');
 
 const baseCss = fs.readFileSync(path.join(srcDir, 'styles', 'variables.css'), 'utf-8');
 
-function buildPage(slug, title, metaDescription, articleHTML, cluster, keywords) {
+function buildPage(slug, title, metaDescription, articleHTML, cluster, heroImage, datePublished = '2026-03-29', dateModified = '2026-11-14') {
     const pageDir = path.join(publicDir, 'learn', slug);
     if (!fs.existsSync(pageDir)) {
         fs.mkdirSync(pageDir, { recursive: true });
@@ -19,12 +19,57 @@ function buildPage(slug, title, metaDescription, articleHTML, cluster, keywords)
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>${title} | Velo</title>
   <meta name="description" content="${metaDescription}" />
-  <meta name="keywords" content="${keywords}" />
   <link rel="canonical" href="https://getvelo.vercel.app/learn/${slug}/" />
+
+  <!-- ═══ Open Graph ═══ -->
   <meta property="og:title" content="${title} | Velo" />
   <meta property="og:description" content="${metaDescription}" />
   <meta property="og:url" content="https://getvelo.vercel.app/learn/${slug}/" />
   <meta property="og:type" content="article" />
+  <meta property="og:image" content="${heroImage}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Velo" />
+
+  <!-- ═══ Twitter Card ═══ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="${title} | Velo" />
+  <meta name="twitter:description" content="${metaDescription}" />
+  <meta name="twitter:image" content="${heroImage}" />
+
+  <!-- ═══ Structured Data (JSON-LD Article Schema) ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": ${JSON.stringify(title)},
+    "description": ${JSON.stringify(metaDescription)},
+    "image": "${heroImage}",
+    "author": {
+      "@type": "Person",
+      "name": "Subash Bhatta",
+      "sameAs": [
+        "https://www.linkedin.com/in/subash-bhatta",
+        "https://github.com/bhattasubash"
+      ]
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Velo",
+      "url": "https://getvelo.vercel.app/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://getvelo.vercel.app/icon-192.png"
+      }
+    },
+    "datePublished": "${datePublished}",
+    "dateModified": "${dateModified}",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://getvelo.vercel.app/learn/${slug}/"
+    }
+  }
+  </script>
   
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -159,6 +204,44 @@ function buildPage(slug, title, metaDescription, articleHTML, cluster, keywords)
 
     .hero-image {
       width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 10px; margin-bottom: 48px; display: block; box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+
+    /* ─── Key Takeaways Callout ─── */
+    .key-takeaways {
+      background: #F8F7FC;
+      border: 1px solid #E9E5F5;
+      border-left: 4px solid #8B5CF6;
+      border-radius: 10px;
+      padding: 22px 24px;
+      margin-bottom: 36px;
+    }
+    .key-takeaways-title {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #7C3AED;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .key-takeaways ul {
+      margin: 0 !important;
+      padding-left: 20px !important;
+      font-size: 16px !important;
+      line-height: 1.65 !important;
+      color: #2D2D2D !important;
+    }
+    .key-takeaways li {
+      margin-bottom: 8px !important;
+    }
+    .key-takeaways li:last-child {
+      margin-bottom: 0 !important;
+    }
+    .key-takeaways strong {
+      color: #111;
     }
 
     /* ─── Sidebar Widgets ─── */
